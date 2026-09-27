@@ -4,4 +4,26 @@ trigger:
      - main
      - feature/*
 
-     
+pool: Infra
+
+stages:
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)\environments\preprod'
+              backendServiceArm: 'Infra'
+              backendAzureRmResourceGroupName: 'ADO-Pipeline-Backend'
+              backendAzureRmStorageAccountName: 'pipelinestorage090926'
+              backendAzureRmContainerName: 'lakshmikant'
+              backendAzureRmKey: 'prepod.terraform.tfstate'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)\environments\preprod'
+              environmentServiceNameAzureRM: 'Infra'
