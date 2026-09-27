@@ -7,11 +7,13 @@ trigger:
 pool: Infra
 
 stages:
-  - stage: 
+  - stage: Build
+    displayName: Build
     jobs:
       - job: 
         steps:
           - task: TerraformTask@5
+            displayName: TerraformInit
             inputs:
               provider: 'azurerm'
               command: 'init'
@@ -22,6 +24,7 @@ stages:
               backendAzureRmContainerName: 'lakshmikant'
               backendAzureRmKey: 'prepod.terraform.tfstate'
           - task: TerraformTask@5
+            displayName: TerraformPlan
             inputs:
               provider: 'azurerm'
               command: 'plan'
