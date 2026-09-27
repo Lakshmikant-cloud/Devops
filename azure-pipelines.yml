@@ -38,6 +38,7 @@ stages:
               workingDirectory: '$(System.DefaultWorkingDirectory)\environments\preprod'
               environmentServiceNameAzureRM: 'Infra'
           - task: TerraformTask@5
+            displayName: TerraformApply
             inputs:
               provider: 'azurerm'
               command: 'apply'
