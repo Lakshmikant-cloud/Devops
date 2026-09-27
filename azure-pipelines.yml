@@ -25,9 +25,16 @@ stages:
               backendAzureRmContainerName: 'lakshmikant'
               backendAzureRmKey: 'prepod.terraform.tfstate'
           - task: TerraformTask@5
+            displayName: TerrformValidate
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+              workingDirectory: '$(System.DefaultWorkingDirectory)\environments\preprod'
+          - task: TerraformTask@5
             displayName: TerraformPlan
             inputs:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)\environments\preprod'
               environmentServiceNameAzureRM: 'Infra'
+          
