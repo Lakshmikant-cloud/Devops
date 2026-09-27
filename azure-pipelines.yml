@@ -10,7 +10,8 @@ stages:
   - stage: Build
     displayName: Build
     jobs:
-      - job: 
+      - job:
+        displayName: InitandPlan
         steps:
           - task: TerraformTask@5
             displayName: TerraformInit
